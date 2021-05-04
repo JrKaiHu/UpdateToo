@@ -17,6 +17,8 @@ namespace UpdateTool
         private string m_strDesFolderPath;
         private string m_strSrcFolderPath;
 
+        private string m_strBackUpPath;
+
         public MainForm()
         {
             InitializeComponent();
@@ -63,7 +65,7 @@ namespace UpdateTool
             string strExePath = strPath + "\\ADSW11000.exe";
             string strDirName = new DirectoryInfo(strPath).Name;
 
-            if (!File.Exists(strExePath) || strDirName != "bin")
+            if (!File.Exists(strExePath) || !strDirName.Contains("ADSW11000"))
             {
                 strExePath = "";
             }
@@ -78,35 +80,47 @@ namespace UpdateTool
             Logger.Info(txtDes.Text);
             Logger.Info(txtSrc.Text);
 
-            DirectoryCopy(txtDes.Text, txtDes.Text + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"), true);
-            DeleteAllFiles(txtDes.Text);
-            CopyFilesRecursively(txtSrc.Text, txtDes.Text);
+            m_strBackUpPath = txtDes.Text + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss");
+
+            // Back the old version
+            DirectoryCopy(txtDes.Text, m_strBackUpPath, true);
+
+            // Delete the all files and folders except "LocalData" from old version
+            DeleteFilesFromOld(txtDes.Text);
+
+            // Copy all files and folders except "LocalData" from new version to old version
+            CopyFilesFromNewToOld(new DirectoryInfo(txtSrc.Text), new DirectoryInfo(txtDes.Text));
+
+            // Replace all xml from backup "Module" folder and Alarm.xls from new version
+            ReplaceSpecificFiles();
+
+            MessageBox.Show("Update Ok!!");
 
             Logger.Debug("OnUpdateClicked() +");
         }
 
-        private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        private void DirectoryCopy(string srcDirPath, string backupDirPath, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo dir = new DirectoryInfo(srcDirPath);
 
             if (!dir.Exists)
             {
                 throw new DirectoryNotFoundException(
                     "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                    + srcDirPath);
             }
 
             DirectoryInfo[] dirs = dir.GetDirectories();
 
-            // If the destination directory doesn't exist, create it.       
-            Directory.CreateDirectory(destDirName);
+            // If the backup directory doesn't exist, create it.
+            Directory.CreateDirectory(backupDirPath);
 
             // Get the files in the directory and copy them to the new location.
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                string tempPath = Path.Combine(destDirName, file.Name);
+                string tempPath = Path.Combine(backupDirPath, file.Name);
                 file.CopyTo(tempPath, false);
             }
 
@@ -115,65 +129,110 @@ namespace UpdateTool
             {
                 foreach (DirectoryInfo subdir in dirs)
                 {
-                    string tempPath = Path.Combine(destDirName, subdir.Name);
+                    string tempPath = Path.Combine(backupDirPath, subdir.Name);
                     DirectoryCopy(subdir.FullName, tempPath, copySubDirs);
                 }
             }
         }
 
-        private void DeleteAllFiles(string strPath)
+        private void DeleteFilesFromOld(string strPath)
         {
-            DirectoryInfo di = new DirectoryInfo(strPath);
-
-            foreach (FileInfo file in di.GetFiles())
+            try
             {
-                File.SetAttributes(file.DirectoryName + "\\" + file.Name, FileAttributes.Normal);
-                file.Delete();
+                DirectoryInfo di = new DirectoryInfo(strPath);
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    File.SetAttributes(file.DirectoryName + "\\" + file.Name, FileAttributes.Normal);
+                    file.Delete();
+                }
+
+                foreach (DirectoryInfo dirInfo in di.GetDirectories())
+                {
+                    if (dirInfo.Name != "LocalData")
+                    //if (dirInfo.Name != "Module" && dirInfo.Name != "LocalData")
+                    {
+                        foreach (FileInfo file in dirInfo.GetFiles())
+                        {
+                            File.SetAttributes(Path.Combine(file.DirectoryName, file.Name), FileAttributes.Normal);
+                        }
+
+                        dirInfo.Delete(true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.ToString());
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public static void CopyFilesFromNewToOld(DirectoryInfo source, DirectoryInfo target)
+        {
+            Directory.CreateDirectory(target.FullName);
+
+            // Copy each file into the new directory.
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
             }
 
-            foreach (DirectoryInfo dirInfo in di.GetDirectories())
+            // Copy each subdirectory using recursion.
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
-                if (dirInfo.Name != "Module" && dirInfo.Name != "LocalData")
+                if (diSourceSubDir.Name != "LocalData")
                 {
-                    foreach (FileInfo file in dirInfo.GetFiles())
-                    {
-                        File.SetAttributes(Path.Combine(file.DirectoryName, file.Name), FileAttributes.Normal);
-                    }
-
-                    dirInfo.Delete(true);
+                    DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
+                    CopyFilesFromNewToOld(diSourceSubDir, nextTargetSubDir);
                 }
             }
         }
 
-        private void CopyFilesRecursively(string sourcePath, string targetPath)
+        private void ReplaceSpecificFiles()
         {
-            // Now Create all of the directories
-            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.TopDirectoryOnly))
+            Logger.Debug("ReplaceSpecificFiles() +");
+
+            #region Copy all xml files from backup folder to destination folder
+
+            string[] originalFiles = Directory.GetFiles(m_strBackUpPath + "\\" + "Module", "*.xml", SearchOption.AllDirectories);
+            List<string> originalFilesLst = new List<string>();
+
+            foreach (var file in originalFiles)
             {
-                string strDirName = new DirectoryInfo(dirPath).Name;
-
-                if (strDirName != "Module" && strDirName != "LocalData")
-                {
-                    DirectoryInfo dirInfo = Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
-                    DirectoryInfo dirInfo2 = new DirectoryInfo(sourcePath + "\\" + strDirName);
-
-                    foreach (FileInfo file in dirInfo2.GetFiles())
-                    {
-                        string strDestFileName = Path.Combine(targetPath + "\\" + strDirName, file.Name);
-                        string strSrcFileName = Path.Combine(sourcePath + "\\" + strDirName, file.Name);
-                        File.Copy(strSrcFileName, strDestFileName, true);
-                    }
-                }
+                originalFilesLst.Add(Path.GetFileName(file));
+                Logger.Debug(file);
             }
 
-            DirectoryInfo di = new DirectoryInfo(sourcePath);
+            string[] replacedFiles = Directory.GetFiles(txtDes.Text + "\\" + "Module", "*.xml", SearchOption.AllDirectories);
+            List<string> replacedFilesLst = new List<string>();
 
-            foreach (FileInfo file in di.GetFiles())
+            foreach (var file in replacedFiles)
             {
-                string strDestFileName = Path.Combine(targetPath, file.Name);
-                string strSrcFileName = Path.Combine(sourcePath, file.Name);
-                File.Copy(strSrcFileName, strDestFileName, true);
+                replacedFilesLst.Add(Path.GetFileName(file));
+                Logger.Debug(file);
             }
+
+            var updateLst = originalFilesLst.Intersect(replacedFilesLst);
+
+            foreach (var strFile in updateLst)
+            {
+                string strSrcFile = Array.Find(originalFiles, x => x.EndsWith(strFile, StringComparison.Ordinal));
+                string strDesFile = Array.Find(replacedFiles, x => x.EndsWith(strFile, StringComparison.Ordinal));
+
+                new FileInfo(strSrcFile).CopyTo(strDesFile, true);
+            }
+
+            #endregion
+
+            #region Copy Local\Alarm.xls from new release folder to destination folder
+
+            FileInfo fInfo = new FileInfo(txtSrc.Text + "\\LocalData\\Alarm.xls");
+            fInfo.CopyTo(txtDes.Text + "\\LocalData\\Alarm.xls", true);
+
+            #endregion
+
+            Logger.Debug("ReplaceSpecificFiles() -");
         }
     }
 }
