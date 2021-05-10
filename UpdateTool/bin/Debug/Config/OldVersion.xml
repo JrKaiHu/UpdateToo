@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Folder Name="ADSW11000_W" IsChecked="False">
+  <Folder Name="AppData" IsChecked="False">
+    <File Name="DbManager.exe" IsChecked="False" />
+    <File Name="DotNetZip.dll" IsChecked="False" />
+    <File Name="LogViewer.exe" IsChecked="False" />
+    <File Name="OEEReport.xls" IsChecked="False" />
+    <File Name="OneClickBackup.exe" IsChecked="False" />
+    <File Name="ReportConfig.xml" IsChecked="False" />
+  </Folder>
+  <Folder Name="BBB" IsChecked="True">
+    <File Name="2.txt" IsChecked="True" />
+  </Folder>
+  <Folder Name="CCC" IsChecked="False">
+    <File Name="1.txt" IsChecked="False" />
+  </Folder>
+  <Folder Name="LocalData" IsChecked="True">
+    <Folder Name="AlarmResource" IsChecked="True">
+      <File Name="E5002.jpg" IsChecked="True" />
+      <File Name="E5002.pdf" IsChecked="True" />
+      <File Name="W5015.jpg" IsChecked="True" />
+    </Folder>
+    <Folder Name="Package" IsChecked="True">
+      <Folder Name="12x12" IsChecked="True">
+        <File Name="Kinsus.xml" IsChecked="True" />
+      </Folder>
+      <Folder Name="130x130" IsChecked="True">
+        <File Name="R17-014.xml" IsChecked="True" />
+      </Folder>
+      <Folder Name="140x140" IsChecked="True">
+        <File Name="ProVTest.xml" IsChecked="True" />
+      </Folder>
+      <Folder Name="170x170" IsChecked="True">
+        <File Name="Test.xml" IsChecked="True" />
+      </Folder>
+      <Folder Name="400x400" IsChecked="True">
+        <File Name="ProVTest.xml" IsChecked="True" />
+      </Folder>
+    </Folder>
+    <Folder Name="SubPackage" IsChecked="True">
+      <Folder Name="BladeZ1Data" IsChecked="True">
+        <File Name="Kinsus.xml" IsChecked="True" />
+      </Folder>
+      <Folder Name="BladeZ2Data" IsChecked="True">
+        <File Name="Kinsus.xml" IsChecked="True" />
+        <File Name="N300.xml" IsChecked="True" />
+        <File Name="N320.xml" IsChecked="True" />
+      </Folder>
+    </Folder>
+    <File Name="Alarm.xls" IsChecked="False" />
+    <File Name="IOTable.xls" IsChecked="True" />
+    <File Name="language.xls" IsChecked="True" />
+    <File Name="MachineSet.xml" IsChecked="True" />
+    <File Name="ProVSECS.xls" IsChecked="True" />
+    <File Name="SCANDATA.xls" IsChecked="True" />
+    <File Name="setup.ini" IsChecked="True" />
+    <File Name="Setup.xml" IsChecked="True" />
+    <File Name="User" IsChecked="True" />
+  </Folder>
+  <Folder Name="Log" IsChecked="False">
+    <Folder Name="ErrLog" IsChecked="False">
+      <File Name="ErrLog.txt" IsChecked="False" />
+    </Folder>
+  </Folder>
+  <Folder Name="Module" IsChecked="False">
+    <Folder Name="MAA" IsChecked="False">
+      <File Name="Alarm.xls" IsChecked="False" />
+      <File Name="language.xls" IsChecked="False" />
+      <File Name="MAA.dll" IsChecked="False" />
+      <File Name="MAA.xml" IsChecked="True" />
+    </Folder>
+    <Folder Name="Saw" IsChecked="False">
+      <File Name="Alarm.xls" IsChecked="False" />
+      <File Name="language.xls" IsChecked="False" />
+      <File Name="Saw.dll" IsChecked="False" />
+      <File Name="Saw.xml" IsChecked="True" />
+    </Folder>
+  </Folder>
+  <File Name="a.txt" IsChecked="False" />
+  <File Name="ADSW11000.exe" IsChecked="False" />
+  <File Name="ADSW11000.exe.config" IsChecked="False" />
+  <File Name="ADSW11000.pdb" IsChecked="False" />
+  <File Name="ADSW11000.vshost.exe" IsChecked="False" />
+  <File Name="ADSW11000.vshost.exe.config" IsChecked="False" />
+  <File Name="ADSW11000.vshost.exe.manifest" IsChecked="False" />
+  <File Name="AdvMotAPI.dll" IsChecked="False" />
+  <File Name="ApsInitLog.log" IsChecked="False" />
+  <File Name="Automation.BDaq4.dll" IsChecked="False" />
+  <File Name="b.txt" IsChecked="False" />
+  <File Name="BackupPathSet.xml" IsChecked="False" />
+  <File Name="BackupSettings.xml" IsChecked="False" />
+  <File Name="clean_lang.bat" IsChecked="False" />
+  <File Name="clean_xml.bat" IsChecked="False" />
+  <File Name="CommonObj.dll" IsChecked="False" />
+  <File Name="CommonObj.pdb" IsChecked="False" />
+  <File Name="DotNetZip.dll" IsChecked="False" />
+  <File Name="EntityFramework.dll" IsChecked="False" />
+  <File Name="EntityFramework.SqlServer.dll" IsChecked="False" />
+  <File Name="EntityFramework.SqlServer.xml" IsChecked="False" />
+  <File Name="EntityFramework.xml" IsChecked="False" />
+  <File Name="EntityFramework6.Npgsql.dll" IsChecked="False" />
+  <File Name="ICSharpCode.SharpZipLib.dll" IsChecked="False" />
+  <File Name="KCSDK.dll" IsChecked="False" />
+  <File Name="KCSDK.pdb" IsChecked="False" />
+  <File Name="LifeTime.xml" IsChecked="False" />
+  <File Name="LogAnalyzer.dll" IsChecked="False" />
+  <File Name="LogAnalyzer.pdb" IsChecked="False" />
+  <File Name="LogAnalyzer.xml" IsChecked="False" />
+  <File Name="Npgsql.dll" IsChecked="False" />
+  <File Name="NPOI.dll" IsChecked="False" />
+  <File Name="NPOI.xml" IsChecked="False" />
+  <File Name="OVT.CustomControls.dll" IsChecked="False" />
+  <File Name="ProgressBars.Basic.dll" IsChecked="False" />
+  <File Name="ProVIFM.dll" IsChecked="False" />
+  <File Name="ProVIFM.pdb" IsChecked="False" />
+  <File Name="ProVModuleSDK.dll" IsChecked="False" />
+  <File Name="ProVSDK.dll" IsChecked="False" />
+  <File Name="ProVSDK.pdb" IsChecked="False" />
+  <File Name="ProVSimpleProject.exe" IsChecked="False" />
+  <File Name="ProVSimpleProject.pdb" IsChecked="False" />
+  <File Name="ProVSimpleProject.vshost.exe.config" IsChecked="False" />
+  <File Name="ProVSimpleProject.vshost.exe.manifest" IsChecked="False" />
+  <File Name="ProVTool.dll" IsChecked="False" />
+  <File Name="ProVTool.pdb" IsChecked="False" />
+  <File Name="Sanford.StateMachineToolkit.dll" IsChecked="False" />
+  <File Name="SAWLib.dll" IsChecked="False" />
+  <File Name="SAWLib.pdb" IsChecked="False" />
+  <File Name="SharedMemory.dll" IsChecked="False" />
+  <File Name="System.Buffers.dll" IsChecked="False" />
+  <File Name="System.Memory.dll" IsChecked="False" />
+  <File Name="System.Runtime.CompilerServices.Unsafe.dll" IsChecked="False" />
+  <File Name="System.Threading.Tasks.Extensions.dll" IsChecked="False" />
+  <File Name="System.ValueTuple.dll" IsChecked="False" />
+  <File Name="SystemErrorlist.txt" IsChecked="False" />
+</Folder>
