@@ -34,8 +34,6 @@
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tvNewVer = new UpdateTool.MyTreeView();
-            this.tvOldVer = new UpdateTool.MyTreeView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBrowseSrc = new System.Windows.Forms.Button();
             this.lblSrcLastTime = new System.Windows.Forms.Label();
@@ -48,6 +46,8 @@
             this.lblDesVer = new System.Windows.Forms.Label();
             this.txtDes = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tvNewVer = new UpdateTool.MyTreeView();
+            this.tvOldVer = new UpdateTool.MyTreeView();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -152,26 +152,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1055, 648);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
-            // tvNewVer
-            // 
-            this.tvNewVer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvNewVer.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tvNewVer.Location = new System.Drawing.Point(535, 152);
-            this.tvNewVer.Name = "tvNewVer";
-            this.tvNewVer.Size = new System.Drawing.Size(517, 493);
-            this.tvNewVer.TabIndex = 23;
-            this.tvNewVer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.OnAfterChecked);
-            // 
-            // tvOldVer
-            // 
-            this.tvOldVer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvOldVer.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tvOldVer.Location = new System.Drawing.Point(3, 152);
-            this.tvOldVer.Name = "tvOldVer";
-            this.tvOldVer.Size = new System.Drawing.Size(516, 493);
-            this.tvOldVer.TabIndex = 22;
-            this.tvOldVer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.OnAfterChecked);
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -231,9 +211,9 @@
             // txtSrc
             // 
             this.txtSrc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSrc.Location = new System.Drawing.Point(3, 38);
+            this.txtSrc.Location = new System.Drawing.Point(3, 39);
             this.txtSrc.Name = "txtSrc";
-            this.txtSrc.Size = new System.Drawing.Size(392, 31);
+            this.txtSrc.Size = new System.Drawing.Size(392, 26);
             this.txtSrc.TabIndex = 11;
             // 
             // label2
@@ -306,9 +286,9 @@
             // txtDes
             // 
             this.txtDes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDes.Location = new System.Drawing.Point(3, 38);
+            this.txtDes.Location = new System.Drawing.Point(3, 39);
             this.txtDes.Name = "txtDes";
-            this.txtDes.Size = new System.Drawing.Size(391, 31);
+            this.txtDes.Size = new System.Drawing.Size(391, 26);
             this.txtDes.TabIndex = 2;
             // 
             // label1
@@ -322,9 +302,29 @@
             this.label1.Text = "舊版本(更新目標位置):";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tvNewVer
+            // 
+            this.tvNewVer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvNewVer.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvNewVer.Location = new System.Drawing.Point(535, 152);
+            this.tvNewVer.Name = "tvNewVer";
+            this.tvNewVer.Size = new System.Drawing.Size(517, 493);
+            this.tvNewVer.TabIndex = 23;
+            this.tvNewVer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.OnAfterChecked);
+            // 
+            // tvOldVer
+            // 
+            this.tvOldVer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvOldVer.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvOldVer.Location = new System.Drawing.Point(3, 152);
+            this.tvOldVer.Name = "tvOldVer";
+            this.tvOldVer.Size = new System.Drawing.Size(516, 493);
+            this.tvOldVer.TabIndex = 22;
+            this.tvOldVer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.OnAfterChecked);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 682);
             this.Controls.Add(this.tableLayoutPanel4);
